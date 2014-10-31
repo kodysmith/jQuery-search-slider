@@ -1,5 +1,6 @@
-$.fn.SearchSlider = function(){
+$.fn.SearchSlider = function(settingsInput){
   var that = this;
+  
   var settings = {
         animationStyle: "slide",
         animationTiming: 500,
@@ -7,7 +8,14 @@ $.fn.SearchSlider = function(){
         closedWidth: "0px",
         openWidth: "250px"
   };
-  
+    if(settingsInput==undefined){}
+    else{
+        for (var key in settingsInput) {
+            if (settings.hasOwnProperty(key)) {
+               settings[key] = settingsInput[key];
+            }
+        }
+    }  
   var SearchBarSlider = (function(el,settings){
     var that = el;
     that.listeners = new Array();
@@ -26,10 +34,9 @@ $.fn.SearchSlider = function(){
         if(direction==undefined){
             direction = "right";
         }
+        that.css('float',direction);
          that.animate({
-             float:direction,
               width: settings.closedWidth
-              
           });
           return 1;
     }
@@ -42,8 +49,8 @@ $.fn.SearchSlider = function(){
             return 0;
         }
     }
-    function initListeners(){
-         
+    function initListeners(settings){
+        
          return 1;
     }
     function registerListener(listener){
@@ -59,15 +66,9 @@ $.fn.SearchSlider = function(){
     that.toggle = toggle;
     that.registerListener = registerListener;
     that.init = initListeners;
+    that.settings = settings;
     return that;
   });
   
   that.data('SearchSlider', new SearchBarSlider(this,settings));
 };
-
-// google custom search bar implementation
-$('#gsc-iw-id1').SearchSlider();
-$('#gsc-iw-id1').click(function(){
-    $('#gsc-iw-id1').data('SearchSlider').toggle();
-    $('#gsc-iw-id1').on( "focusout",function(){$(this).data('SearchSlider').slideClosed();});
-});

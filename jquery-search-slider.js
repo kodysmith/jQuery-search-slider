@@ -2,20 +2,20 @@ $.fn.SearchSlider = function(settingsInput){
   var that = this;
   
   var settings = {
-        animationStyle: "slide",
-        animationTiming: 500,
-        direction: "right",
-        closedWidth: "0px",
-        openWidth: "250px"
+    animationStyle: "slide",
+    animationTiming: 500,
+    direction: "right",
+    closedWidth: "0px",
+    openWidth: "250px"
   };
-    if(settingsInput==undefined){}
-    else{
-        for (var key in settingsInput) {
-            if (settings.hasOwnProperty(key)) {
-               settings[key] = settingsInput[key];
-            }
-        }
-    }  
+  if(settingsInput==undefined){}
+  else{
+    for (var key in settingsInput) {
+      if (settings.hasOwnProperty(key)) {
+       settings[key] = settingsInput[key];
+      }
+    }
+  }  
   var SearchBarSlider = (function(el,settings){
     var that = el;
     that.listeners = new Array();
